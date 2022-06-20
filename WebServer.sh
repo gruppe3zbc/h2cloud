@@ -1,6 +1,12 @@
 yum -y update
 
 firewall-cmd --permanent --add-port=115/tcp
+
+#fail2ban
+sudo yum -y install fail2ban fail2ban-systemd
+sudo systemctl start fail2ban
+sudo systemctl enable fail2ban
+
 #apache
 yum -y install httpd
 firewall-cmd --permanent --add-service=http --add-service=https
@@ -32,7 +38,6 @@ baseurl = http://yum.mariadb.org/10.3/centos7-amd64
 gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
 gpgcheck=1" | tee /etc/yum.repos.d/MariaDB.repo
 yum -y install MariaDB-client MariaDB-shared
-
 
 #Wordpress 
 mkdir /var/www/html/wordpress 
